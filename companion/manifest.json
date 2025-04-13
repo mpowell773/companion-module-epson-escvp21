@@ -1,28 +1,16 @@
 {
-	"id": "generic-tcp-udp",
-	"name": "generic-tcp-udp",
-	"shortname": "tcp-udp",
-	"description": "Generic TCP and UDP",
-	"version": "0.0.0",
+	"id": "epson-escpv21",
+	"name": "epson-escpv21",
+	"shortname": "escpv21",
+	"description": "Epson ESC/PV21 Protocol",
+	"version": "0.0.1",
 	"license": "MIT",
-	"repository": "git+https://github.com/bitfocus/companion-module-generic-tcp-udp.git",
-	"bugs": "https://github.com/bitfocus/companion-module-generic-tcp-udp/issues",
+	"repository": "nil",
+	"bugs": "nil",
 	"maintainers": [
 		{
-			"name": "Andreas H. Thomsen",
-			"email": "mc-hauge@hotmail.com"
-		},
-		{
-			"name": "Andrew Broughton",
-			"email": "andy@checkcheckonetwo.com"
-		},
-		{
-			"name": "John A Knight Jr",
-			"email": "istnv@ayesti.com"
-		},
-		{
-			"name": "Joseph Adams",
-			"email": "josephdadams@gmail.com"
+			"name": "Matt Powell",
+			"email": "mpowell171@gmail.com"
 		}
 	],
 	"legacyIds": [],
@@ -32,7 +20,12 @@
 		"apiVersion": "0.0.0",
 		"entrypoint": "../index.js"
 	},
-	"manufacturer": "Generic",
-	"products": ["TCP and UDP Requests"],
-	"keywords": ["Protocol", "Generic"]
+	"manufacturer": "Epson Projectors",
+	"products": [
+		"ESC/VP21 Protocol"
+	],
+	"keywords": [
+		"TCP",
+		"ESC/VP21"
+	]
 }

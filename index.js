@@ -2,7 +2,7 @@ import { InstanceBase, InstanceStatus, runEntrypoint, TCPHelper, UDPHelper } fro
 import { ConfigFields } from './config.js'
 import { getActionDefinitions } from './actions.js'
 
-class GenericTcpUdpInstance extends InstanceBase {
+class EpsonEscvp21Instance extends InstanceBase {
 	async init(config) {
 		this.config = config
 
@@ -127,4 +127,4 @@ class GenericTcpUdpInstance extends InstanceBase {
 	}
 }
 
-runEntrypoint(GenericTcpUdpInstance, [])
+runEntrypoint(EpsonEscvp21Instance, [])
