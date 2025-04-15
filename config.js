@@ -16,25 +16,14 @@ export const ConfigFields = [
 		id: 'port',
 		label: 'Target Port',
 		width: 4,
-		default: 7000,
+		default: 3629,
 		regex: Regex.PORT,
-	},
-	{
-		type: 'dropdown',
-		id: 'prot',
-		label: 'Connect with TCP / UDP',
-		default: 'tcp',
-		choices: [
-			{ id: 'tcp', label: 'TCP' },
-			{ id: 'udp', label: 'UDP' },
-		],
 	},
 	{
 		type: 'checkbox',
 		id: 'saveresponse',
 		label: 'Save TCP Response',
 		default: false,
-		isVisible: (configValues) => configValues.prot === 'tcp',
 	},
 	{
 		type: 'dropdown',
@@ -46,6 +35,6 @@ export const ConfigFields = [
 			{ id: 'hex', label: 'To Hex' },
 			{ id: 'string', label: 'To String' },
 		],
-		isVisible: (configValues) => configValues.prot === 'tcp' && !!configValues.saveresponse,
+		isVisible: (configValues) => !!configValues.saveresponse,
 	},
 ]

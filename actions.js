@@ -39,77 +39,16 @@ export function getActionDefinitions(self) {
 					 * and destroys the 'binary' content
 					 */
 					const sendBuf = Buffer.from(cmd + action.options.id_end, 'latin1')
+					self.log('debug', 'sending to ' + self.config.host + ': ' + sendBuf.toString())
 
-					if (self.config.prot == 'tcp') {
-						self.log('debug', 'sending to ' + self.config.host + ': ' + sendBuf.toString())
-
-						if (self.socket !== undefined && self.socket.isConnected) {
-							self.socket.send(sendBuf)
-						} else {
-							self.log('debug', 'Socket not connected :(')
-						}
-					}
-
-					if (self.config.prot == 'udp') {
-						if (self.udp !== undefined) {
-							self.log('debug', 'sending to ' + self.config.host + ': ' + sendBuf.toString())
-
-							self.udp.send(sendBuf)
-						}
+					if (self.socket !== undefined && self.socket.isConnected) {
+						self.socket.send(sendBuf)
+					} else {
+						self.log('debug', 'Socket not connected :(')
 					}
 				}
 			},
 		},
-		send_hex: {
-			name: 'Send HEX encoded Command',
-			options: [
-				{
-					type: 'textinput',
-					id: 'id_send_hex',
-					label: 'Command:',
-					tooltip: 'Decoding stops at first non-valid hex digit',
-					default: '',
-					useVariables: true,
-				},
-				{
-					type: 'dropdown',
-					id: 'id_end',
-					label: 'Command End Character:',
-					default: '',
-					choices: CHOICES_END,
-				},
-			],
-			callback: async (action) => {
-				const cmd = Buffer.from(await self.parseVariablesInString(action.options.id_send_hex), 'hex')
-
-				if (cmd != '') {
-					/*
-					 * create a binary buffer pre-encoded 'latin1' (8bit raw bytes)
-					 * sending a default string assumes 'utf8' encoding
-					 * which then escapes character values over 0x7F
-					 * and destroys the 'binary' content
-					 */
-					const sendBuf = Buffer.concat([cmd, Buffer.from(action.options.id_end, 'latin1')])
-
-					if (self.config.prot == 'tcp') {
-						self.log('debug', 'sending to ' + self.config.host + ': ' + sendBuf.toString('hex'))
-
-						if (self.socket !== undefined && self.socket.isConnected) {
-							self.socket.send(sendBuf)
-						} else {
-							self.log('debug', 'Socket not connected :(')
-						}
-					}
-
-					if (self.config.prot == 'udp') {
-						if (self.udp !== undefined) {
-							self.log('debug', 'sending to ' + self.config.host + ': ' + sendBuf.toString('hex'))
-
-							self.udp.send(sendBuf)
-						}
-					}
-				}
-			},
-		},
+		// Insert new commands here
 	}
 }
