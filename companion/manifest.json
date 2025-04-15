@@ -1,6 +1,6 @@
 {
 	"id": "epson-escpv21",
-	"name": "epson-escpv21",
+	"name": "Epson ESC/PV21 TCP Protocol",
 	"shortname": "escpv21",
 	"description": "Epson ESC/PV21 Protocol",
 	"version": "0.0.1",
@@ -26,6 +26,6 @@
 	],
 	"keywords": [
 		"TCP",
-		"ESC/VP21"
+		"Projector"
 	]
 }
