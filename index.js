@@ -21,6 +21,8 @@ class EpsonEscvp21Instance extends InstanceBase {
 		this.config = config
 		this.init_tcp()
 		this.init_tcp_variables()
+		// Work on this here!
+		this.init_escvp21_connection()
 	}
 
 	async destroy() {
@@ -77,9 +79,37 @@ class EpsonEscvp21Instance extends InstanceBase {
 
 	init_tcp_variables() {
 		this.setVariableDefinitions([{ name: 'Last TCP Response', variableId: 'tcp_response' }])
-
 		this.setVariableValues({ tcp_response: '' })
 	}
+
+	async init_escvp21_connection() {
+		await this.waitForSocketConnection()
+
+		// The hex sequence below is the escp/vp.net handshake
+		const sendBuf = Buffer.from('4553432F56502E6E6574100300000000' + '\r', 'hex')
+		if (this.socket !== undefined && this.socket.isConnected) {
+			this.socket.send(sendBuf)
+		} else {
+			this.log('debug', 'Socket not connected :(')
+		}
+	}
+
+	// function that waits until socket is connected
+	// Thank you https://github.com/bitfocus/companion-module-extron-mmx-tcp/blob/main/index.js
+	waitForSocketConnection() {
+		return new Promise((resolve, reject) => {
+			const checkConnection = () => {
+				if (this.socket !== undefined && this.socket.isConnected) {
+					resolve();
+				} else {
+					setTimeout(checkConnection, 500)
+				}
+			};
+
+			checkConnection()
+		})
+	}
+
 }
 
 runEntrypoint(EpsonEscvp21Instance, [])

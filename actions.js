@@ -24,7 +24,7 @@ export function getActionDefinitions(self) {
 					type: 'dropdown',
 					id: 'id_end',
 					label: 'Command End Character:',
-					default: '\n',
+					default: '\r',
 					choices: CHOICES_END,
 				},
 			],
@@ -43,6 +43,7 @@ export function getActionDefinitions(self) {
 
 					if (self.socket !== undefined && self.socket.isConnected) {
 						self.socket.send(sendBuf)
+						console.log(sendBuf.toString())
 					} else {
 						self.log('debug', 'Socket not connected :(')
 					}
