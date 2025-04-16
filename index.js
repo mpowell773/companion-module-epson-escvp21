@@ -21,7 +21,6 @@ class EpsonEscvp21Instance extends InstanceBase {
 		this.config = config
 		this.init_tcp()
 		this.init_tcp_variables()
-		// Work on this here!
 		this.init_escvp21_connection()
 	}
 

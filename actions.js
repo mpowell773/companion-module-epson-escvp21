@@ -16,7 +16,7 @@ export function getActionDefinitions(self) {
 					type: 'textinput',
 					id: 'id_send',
 					label: 'Command:',
-					tooltip: 'Do not use this action unless you need to implement an esc/vp21 command that has not yet been created. ',
+					tooltip: 'Do not use this action unless you need to implement an esc/vp21 command that has not yet been created.',
 					default: '',
 					useVariables: true,
 				},
@@ -51,10 +51,35 @@ export function getActionDefinitions(self) {
 				}
 			},
 		},
+
 		powerOn: {
 			name: 'Power On',
 			callback: async (action) => {
 				const cmd = 'PWR ON'
+				sendCommand(self, cmd)
+			},
+		},
+
+		powerOff: {
+			name: 'Power Off',
+			callback: async (action) => {
+				const cmd = 'PWR OFF'
+				sendCommand(self, cmd)
+			},
+		},
+
+		shutterClose: {
+			name: 'Close Shutter',
+			callback: async (action) => {
+				const cmd = 'MUTE ON'
+				sendCommand(self, cmd)
+			},
+		},
+
+		shutterOpen: {
+			name: 'Open Shutter',
+			callback: async (action) => {
+				const cmd = 'MUTE OFF'
 				sendCommand(self, cmd)
 			},
 		},
