@@ -1,12 +1,12 @@
 {
-	"id": "epson-escpv21",
+	"id": "epson-escpv21-tcp",
 	"name": "Epson ESC/PV21 TCP Protocol",
-	"shortname": "escpv21",
-	"description": "Epson ESC/PV21 Protocol",
+	"shortname": "escpv21-tcp",
+	"description": "Utilizes Epson's ESC/PV21 protocol over a TCP connection via ESC/PV.NET.",
 	"version": "0.0.1",
 	"license": "MIT",
-	"repository": "nil",
-	"bugs": "nil",
+	"repository": "https://github.com/mpowell773/companion-module-epson-escvp21",
+	"bugs": "https://github.com/mpowell773/companion-module-epson-escvp21/issues",
 	"maintainers": [
 		{
 			"name": "Matt Powell",
@@ -20,9 +20,10 @@
 		"apiVersion": "0.0.0",
 		"entrypoint": "../index.js"
 	},
-	"manufacturer": "Epson Projectors",
+	"manufacturer": "Epson",
 	"products": [
-		"ESC/VP21 Protocol"
+		"ESC/VP21 Protocol",
+		"ESC/VP.Net"
 	],
 	"keywords": [
 		"TCP",
