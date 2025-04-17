@@ -9,6 +9,7 @@ export const ConfigFields = [
 		id: 'host',
 		label: 'Projector IP Address',
 		width: 8,
+		default: '192.168.1.100',
 		regex: REGEX_IP_OR_HOST,
 	},
 	{
@@ -16,6 +17,7 @@ export const ConfigFields = [
 		id: 'port',
 		label: 'Target Port',
 		width: 4,
+		tooltip: 'You should not need to update the target port, but this is exposed on the off-hand chance that it is necessary to do so.',
 		default: 3629,
 		regex: Regex.PORT,
 	},
@@ -23,13 +25,13 @@ export const ConfigFields = [
 		type: 'checkbox',
 		id: 'saveresponse',
 		label: 'Save TCP Response',
-		default: false,
+		default: true,
 	},
 	{
 		type: 'dropdown',
 		id: 'convertresponse',
 		label: 'Convert TCP Response Format',
-		default: 'none',
+		default: 'string',
 		choices: [
 			{ id: 'none', label: 'No conversion' },
 			{ id: 'hex', label: 'To Hex' },

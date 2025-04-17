@@ -1,12 +1,14 @@
 import { InstanceBase, InstanceStatus, runEntrypoint, TCPHelper } from '@companion-module/base'
 import { ConfigFields } from './config.js'
 import { getActionDefinitions } from './actions.js'
+import { getFeedbackDefinitions } from './feedbacks.js'
 
 class EpsonEscvp21Instance extends InstanceBase {
 	async init(config) {
 		this.config = config
 
 		this.setActionDefinitions(getActionDefinitions(this))
+		this.setFeedbackDefinitions(getFeedbackDefinitions(this))
 
 		await this.configUpdated(config)
 	}
@@ -108,7 +110,6 @@ class EpsonEscvp21Instance extends InstanceBase {
 			checkConnection()
 		})
 	}
-
 }
 
 runEntrypoint(EpsonEscvp21Instance, [])

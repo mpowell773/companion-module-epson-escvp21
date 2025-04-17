@@ -1,12 +1,4 @@
-const CHOICES_END = [
-	{ id: '', label: 'None' },
-	{ id: '\n', label: 'LF - \\n (Common UNIX/Mac)' },
-	{ id: '\r\n', label: 'CRLF - \\r\\n (Common Windows)' },
-	{ id: '\r', label: "CR - \\r (1970's RS232 terminal)" },
-	{ id: '\x00', label: 'NULL - \\x00 (Can happen)' },
-	{ id: '\n\r', label: 'LFCR - \\n\\r (Just stupid)' },
-]
-
+// Store Projector Commands here!
 const PROJECTOR_COMMANDS = {
 	'powerOn': 'PWR ON',
 	'powerOff': 'PWR OFF',
