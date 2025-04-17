@@ -29,25 +29,9 @@ export function getActionDefinitions(self) {
 				},
 			],
 			callback: async (action) => {
-				// This is wet code that is left behind for an essentially deprecated action
-				const cmd = unescape(await self.parseVariablesInString(action.options.id_send))
-
+				const cmd = await self.parseVariablesInString(action.options.id_send)
 				if (cmd != '') {
-					/*
-					 * create a binary buffer pre-encoded 'latin1' (8bit no change bytes)
-					 * sending a string assumes 'utf8' encoding
-					 * which then escapes character values over 0x7F
-					 * and destroys the 'binary' content
-					 */
-					const sendBuf = Buffer.from(cmd + '\r', 'latin1')
-					self.log('debug', 'sending to ' + self.config.host + ': ' + sendBuf.toString())
-
-					if (self.socket !== undefined && self.socket.isConnected) {
-						self.socket.send(sendBuf)
-						console.log(sendBuf.toString())
-					} else {
-						self.log('debug', 'Socket not connected :(')
-					}
+					sendCommand(self, cmd)
 				}
 			},
 		},
@@ -116,6 +100,12 @@ export function getActionDefinitions(self) {
 
 // Helper function for above actions
 const sendCommand = (self, cmd) => {
+	/*
+	* create a binary buffer pre-encoded 'latin1' (8bit no change bytes)
+	* sending a string assumes 'utf8' encoding
+	* which then escapes character values over 0x7F
+	* and destroys the 'binary' content
+	*/
 	const endLine = '\r'
 	const sendBuf = Buffer.from(cmd + endLine, 'latin1')
 	self.log('debug', 'sending to ' + self.config.host + ': ' + sendBuf.toString())
