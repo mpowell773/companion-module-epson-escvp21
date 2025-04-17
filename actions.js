@@ -7,6 +7,13 @@ const CHOICES_END = [
 	{ id: '\n\r', label: 'LFCR - \\n\\r (Just stupid)' },
 ]
 
+const PROJECTOR_COMMANDS = {
+	'powerOn': 'PWR ON',
+	'powerOff': 'PWR OFF',
+	'shutterOpen': 'MUTE OFF',
+	'shutterClose': 'MUTE ON',
+}
+
 export function getActionDefinitions(self) {
 	return {
 		send: {
@@ -20,13 +27,6 @@ export function getActionDefinitions(self) {
 					default: '',
 					useVariables: true,
 				},
-				{
-					type: 'dropdown',
-					id: 'id_end',
-					label: 'Command End Character:',
-					default: '\r',
-					choices: CHOICES_END,
-				},
 			],
 			callback: async (action) => {
 				// This is wet code that is left behind for an essentially deprecated action
@@ -39,7 +39,7 @@ export function getActionDefinitions(self) {
 					 * which then escapes character values over 0x7F
 					 * and destroys the 'binary' content
 					 */
-					const sendBuf = Buffer.from(cmd + action.options.id_end, 'latin1')
+					const sendBuf = Buffer.from(cmd + '\r', 'latin1')
 					self.log('debug', 'sending to ' + self.config.host + ': ' + sendBuf.toString())
 
 					if (self.socket !== undefined && self.socket.isConnected) {
@@ -54,33 +54,61 @@ export function getActionDefinitions(self) {
 
 		powerOn: {
 			name: 'Power On',
+			options: [
+				{
+					id: 'pwr_on_description',
+					type: 'static-text',
+					label: 'Info',
+					value: 'Powers on the projector with the command: ' + PROJECTOR_COMMANDS.powerOn
+				},
+			],
 			callback: async (action) => {
-				const cmd = 'PWR ON'
-				sendCommand(self, cmd)
+				sendCommand(self, PROJECTOR_COMMANDS.powerOn)
 			},
 		},
 
 		powerOff: {
 			name: 'Power Off',
+			options: [
+				{
+					id: 'pwr_off_description',
+					type: 'static-text',
+					label: 'Info',
+					value: 'Powers off the projector with the command: ' + PROJECTOR_COMMANDS.powerOff
+				},
+			],
 			callback: async (action) => {
-				const cmd = 'PWR OFF'
-				sendCommand(self, cmd)
+				sendCommand(self, PROJECTOR_COMMANDS.powerOff)
 			},
 		},
 
 		shutterClose: {
 			name: 'Close Shutter',
+			options: [
+				{
+					id: 'close_shutter_description',
+					type: 'static-text',
+					label: 'Info',
+					value: 'Closes shutter with the command: ' + PROJECTOR_COMMANDS.shutterClose
+				},
+			],
 			callback: async (action) => {
-				const cmd = 'MUTE ON'
-				sendCommand(self, cmd)
+				sendCommand(self, PROJECTOR_COMMANDS.shutterClose)
 			},
 		},
 
 		shutterOpen: {
 			name: 'Open Shutter',
+			options: [
+				{
+					id: 'open_shutter_description',
+					type: 'static-text',
+					label: 'Info',
+					value: 'Opens shutter with the command: ' + PROJECTOR_COMMANDS.shutterOpen
+				},
+			],
 			callback: async (action) => {
-				const cmd = 'MUTE OFF'
-				sendCommand(self, cmd)
+				sendCommand(self, PROJECTOR_COMMANDS.shutterOpen)
 			},
 		},
 	}
